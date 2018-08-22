@@ -1,0 +1,869 @@
+---
+title: 'Course: Data Science'
+author:
+- Anna Baghumyan
+- Maria Davoodian
+- Hermine Grigoryan
+- Arusyak Hakobyan
+- Lilia Mamikonyan
+date: "July 19, 2018"
+output:
+  html_document:
+    df_print: paged
+subtitle: 'Group Homework #4'
+toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = F)
+```
+
+\pagebreak 
+
+# Objective
+
+In this group homework we used Web scraping techqniques (Web Scraping and APIs) to scrap data from different websites and work on it. The project consists of two parts. 
+
+The first part includes web scraping, data cleaning and quantitative analysis of 2016-2017 and 2017-2018 La Liga football statistics. In the analysis, we provide some plots to visualize numbers and get interesting insights from them. The codes for data scraping and cleaning are provided in a separate R script file.
+
+The second part of the project includes text mining. The data was scraped from Twitter. It contains information about reactions of Twitter users about trailers of movies *Aquaman* and *Fantastic Beasts*. Warner Bros. revealed the trailers of these movies on 21 of July, 2018, and this topic became very popular that day. The analysis includes some graphs and wordclouds about common words used by the users. Moreover, it includes sentiment analysis of the tweets.
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+```{r echo=FALSE, out.width = '100%', fig.align='center'}
+knitr::include_graphics("1_VFjtmxQglIOSkj6XhuDZgw.png")
+```
+
+\pagebreak
+
+```{r, include=F}
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(RColorBrewer)
+library(wesanderson)
+library(ggrepel)
+
+library(stringr)
+library(tm)
+library(wordcloud)
+library(qdap)
+library(kableExtra)
+library(pander)
+
+
+football1<-read.csv("standard2016.csv", stringsAsFactors = F)
+football2<-read.csv("standard2017.csv", stringsAsFactors = F)
+str(football1)
+str(football2)
+
+football1[is.na(football1$Clubs), "Clubs"]<-"UNKNOWN"
+football2[is.na(football2$Clubs), "Clubs"]<-"UNKNOWN"
+
+football1$Clubs<-as.factor(football1$Clubs)
+football2$Clubs<-as.factor(football2$Clubs)
+unique(football1$Clubs)
+unique(football2$Clubs)
+```
+
+
+\pagebreak
+
+# Part #1
+### Total Goals per Each Club
+We will start our analysis from simple statistics. First of all, we need to find out the number of goals per each club both for seasons 2016-17, 2017-18.
+
+```{r}
+colourCount = length(unique(football1$Clubs))
+getPalette1 = colorRampPalette(brewer.pal(11, "Spectral"))
+
+tema<-theme(panel.background = element_rect(fill="#f4f4f4"),
+        title = element_text(face="italic", size=12))
+
+goal1<-football1 %>%
+  group_by(Clubs) %>%
+  summarise(Goals=sum(G)) %>%
+  ggplot(aes(x=reorder(Clubs, Goals), y=Goals))+
+  geom_bar(stat="identity", fill=getPalette1(colourCount))+
+  coord_flip()+labs(title="Total Goals in 2016-17 for Each Club",
+                    y="Total Goals", x="Club")+
+  scale_y_continuous(breaks=seq(0,130,10))+tema
+
+goal2<-football2 %>%
+  group_by(Clubs) %>%
+  summarise(Goals=sum(G)) %>%
+  ggplot(aes(x=reorder(Clubs, Goals), y=Goals))+
+  geom_bar(stat="identity", fill=getPalette1(colourCount))+
+  coord_flip()+labs(title="Total Goals in 2017-18 for Each Club",
+                    y="Total Goals", x="Club")+
+  scale_y_continuous(breaks=seq(0,130,10))+tema
+
+ggarrange(goal1, goal2)
+```
+
+
+As we see from the barplot, Barcelona has scored the most goals for the both seasons. It is around 110 for the first season, and 95 for the second season. 
+
+Barcelona is followed by Real Madrid scoring around 105 and 90 goals for two seasons respectively. 
+
+The situation was different with the third team. Atletico was in the third place with 70 goals in 2016-17 season, while Valencia was in the third place in 2017-18 with around 60 goals. 
+
+
+### Top Number of Yellow Cards for Teams and Players
+```{r}
+getPalette2 = colorRampPalette(brewer.pal(12, "Set3"))
+
+yellow1<-football1 %>%
+  group_by(Clubs) %>%
+  summarise(Yellow=sum(YC)) %>%
+  ggplot(aes(x=reorder(Clubs, Yellow), y=Yellow))+
+  geom_bar(stat="identity", fill=getPalette2(colourCount))+
+  coord_flip()+labs(title="Total Yellow Cards in 2016-17 for Each Club",
+                    x="Number of Yellow Cards", y="Club")+
+  scale_y_continuous(breaks=seq(0,130,15))+tema
+
+yellow2<-football2 %>%
+  group_by(Clubs) %>%
+  summarise(Yellow=sum(YC)) %>%
+  ggplot(aes(x=reorder(Clubs, Yellow), y=Yellow))+
+  geom_bar(stat="identity", fill=getPalette2(colourCount))+
+  coord_flip()+labs(title="Total Yellow Cards in 2017-18 for Each Club",
+                    x="Number of Yellow Cards", y="Club")+
+  scale_y_continuous(breaks=seq(0,130,15))+tema
+
+ggarrange(yellow1, yellow2)
+```
+
+It is intersting to know which club's players got the most yellow and red cards for both seasons. As we see from the barplot, players of Alaves got almost 120 yellow cards in the first season. The trend continued for Getafe club in 2017-18. The least yellow cards were for the unknown clubs :)
+
+* **A small note:** for every 5 yellow cards the same player gets, he misses the next match. 
+
+\pagebreak
+
+Now, let's see which players got the most yellow cards. 
+
+```{r, dpi=300, fig.width = 8, fig.height = 4}
+football1 %>%
+  filter(YC>12) %>%
+  ggplot(aes(x=reorder(Names, YC), y=YC))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  coord_flip()+labs(title="Total Yellow Cards in 2016-17 for Each Player",
+                    y="Number of Yellow Cards", x="Player")+
+  scale_fill_manual(values = brewer.pal(12, "Set3"))+theme_grey(base_size = 11)
+
+football2 %>%
+  filter(YC>12) %>%
+  ggplot(aes(x=reorder(Names, YC), y=YC))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  coord_flip()+labs(title="Total Yellow Cards in 2017-18 for Each Player",
+                    y="Number of Yellow Cards", x="Player")+
+  scale_fill_manual(values = brewer.pal(12, "Set3"))+theme_grey(base_size = 11)
+```
+
+For season 2016-17 daredevils were Fernando Amorebieta from Gijon, and Jefferson Lerma from Levante for the next season. 
+
+\pagebreak
+
+### Top Number of Red Cards for Teams
+
+Now, let's see how things are going with the red cards. 
+
+```{r}
+getPalette3 = colorRampPalette(brewer.pal(8, "Accent"))
+
+red1<-football1 %>%
+  group_by(Clubs) %>%
+  summarise(Red=sum(RC)) %>%
+  ggplot(aes(x=reorder(Clubs, Red), y=Red))+
+  geom_bar(stat="identity", fill=getPalette3(colourCount))+
+  coord_flip()+labs(title="Total Red Cards in 2016-17 for Each Club",
+                    y="Number of Red Cards", x="Club")+
+  scale_y_continuous(breaks=seq(0,10, 1))+tema
+
+red2<-football2 %>%
+  group_by(Clubs) %>%
+  summarise(Red=sum(RC)) %>%
+  ggplot(aes(x=reorder(Clubs, Red), y=Red))+
+  geom_bar(stat="identity", fill=getPalette3(colourCount))+
+  coord_flip()+labs(title="Total Red Cards in 2017-18 for Each Club",
+                    y="Number of Red Cards", x="Club")+
+  scale_y_continuous(breaks=seq(0,10,1))+tema
+
+ggarrange(red1, red2)
+```
+
+On the top of the list for the first season was club Celta (8 cards), followed by Eibar with 7 red cards. 
+
+The number of the red cards for the next season was also 8. Now, on the top was Malaga.
+
+We know that for each red card, the player will get suspended for at least one game.
+
+\pagebreak
+
+### Percentage of Goals from Shots for Each Player
+Now, we want to understand which percentage of shots of each player were actually goals. We have limited the number of players to those who have scored at least 12 goals in 2016-2017 season and at least 15 goals in 2017-2018 season. This will eliminate most defenders, goalkeepers and some mid-fielders as they usually do not score many goals. 
+
+Secondly, we actually get that percentage by dividing total number of goals for a particular player by the shots in has made.
+
+```{r, dpi=300, fig.width = 7, fig.height = 3}
+football1 %>%
+  filter(G>12) %>%
+  mutate(Ratio=G/S) %>%
+  ggplot(aes(x=reorder(Names, Ratio), y=Ratio))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  scale_fill_manual(values = brewer.pal(12, "Set3"))+
+  scale_y_continuous(breaks = seq(0,1,0.03))+
+  coord_flip()+labs(title="Percentage of Goals from Shots in 2016-17",
+                    y="Percentage", x="Player")+theme_grey(base_size = 11)
+
+
+football2 %>%
+  filter(G>15) %>%
+  mutate(Ratio=G/S) %>%
+  ggplot(aes(x=reorder(Names, Ratio), y=Ratio))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  scale_fill_manual(values = brewer.pal(12, "Set3"))+
+  scale_y_continuous(breaks = seq(0,1,0.03))+
+  coord_flip()+labs(title="Percentage of Goals from Shots in 2017-18",
+                    y="Percentage", x="Player")+theme_grey(base_size = 11)
+```
+
+From the plots, we see that in 2016-17 Alvaro Morata's shots from Real Madrid were the most promising ones which were actually goals. Being such a deadly finisher, Alvaro Morata was not happy at Real Madrid playing as a substitute most games and probably that is why he decided to leave his club.Luis Suarez from Barcelona is next on this list.
+
+The things are different for the second season. Here, Cristhian Stuani from Girona, who surprised everyone with their quality football, is on the top. Being in a team that was just promoted to La Liga from the second division, Stuani's 21 goals with a high accuracy percentage were crucial in Girona claiming the 10th spot on the table in 2017-2018. In second place comes Antonie Griezmann from Atletico Madrid, helping his team to secure a spot in the Champions League.
+
+\pagebreak
+
+### Percentage of Shots on Goals from Shots
+Forwards' performance can be also measured by how accurate they are with their shots in general. Every manager expects their strikers to at least hit the target when taking a shot. For this, we found out the percentage of shots on goal (SOG) from the total number of shots (S) taken.
+For finding the percentage of shots on goals from the total shots for each player, we also filtered the data by leaving only players with more than 12 and 15 goals for two seasons respectively. 
+Then, we divided SOG on S to get percentages.
+
+```{r, dpi=300, fig.width = 7, fig.height = 3}
+football1 %>%
+  filter(G>12) %>%
+  mutate(Ratio=SOG/S) %>%
+  ggplot(aes(x=reorder(Names, Ratio), y=Ratio))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  scale_fill_manual(values = brewer.pal(12, "Paired"))+
+  scale_y_continuous(breaks=seq(0,1,0.1))+
+  coord_flip()+labs(title="Percentage of Shots on Goals from Shots in 2016-17",
+                    y="Percentage", x="Player")+theme_grey(base_size = 12)
+
+football2 %>%
+  filter(G>15) %>%
+  mutate(Ratio=SOG/S) %>%
+  ggplot(aes(x=reorder(Names, Ratio), y=Ratio))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  scale_fill_manual(values = brewer.pal(12, "Paired"))+
+  scale_y_continuous(breaks=seq(0,1,0.1))+
+  coord_flip()+labs(title="Percentage of Shots on Goals from Shots in 2017-18",
+                    y="Percentage", x="Player")+theme_grey(base_size = 12)
+```
+
+Again, we can see familiar names on the top of this list for the two seasons. Alvaro Morata again was very efficient with the shots he took in 2016-2017. Aritz Aduriz, being second in the same year, did not impress as well in the second year, though. Probably, due to this and the fact that their manager left, his team struggled in 2017-2018.
+
+Antonie Griezmann and Christian Stuani again are leading the top charts in 2017-2018 by their accuracy of shots on goals. We could claim that these two players were the most efficient strikers in the second season in La Liga. Whenever taking a shot the players were most likely to at least hit the target. And when they hit the target, they were the most likely of the all players to score a goal.
+
+\pagebreak
+
+### Goals and Assits per 90 Minutes
+
+Goal and assists are what make football fans excited and inspired to watch and play themselves. It is no secret that the biggest stars in football are either creators or scorer of goals and even both. This analysis includes those players who have scored and assisted the most per 90 minutes they played.
+
+We calculated the ratio per minutes and not games they played to not discredit those who did not start the games and had little time to play but still contributed by scoring or assisting. On top of the charts is Lionel Messi for both seasons. It is interesting to see that in 2016-2017 Real Madrid had 4 players in the top 7 and they won the league that year. But last season they had only two players there and finished third.
+
+```{r, dpi=300, fig.width = 7, fig.height = 3}
+football1 %>%
+  filter(GP>15) %>%
+  mutate(Ratio=(G+A)/(MP/90)) %>%
+  filter(Ratio>0.89) %>%
+  ggplot(aes(x=reorder(Names, Ratio), y=Ratio))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  scale_fill_manual(values = brewer.pal(8, "Accent"))+
+  scale_y_continuous(breaks = seq(0,2,0.25))+
+  coord_flip()+labs(title="Goals and Assits per 90 Minutes in 2016-17",
+                    x="Player", y="Number of Goals and Assists")+theme_grey(base_size = 12)+
+  theme(panel.background = element_rect(fill="#f6f6f6"),
+        title = element_text(face="italic"))
+
+
+football2 %>%
+  filter(GP>15) %>%
+  mutate(Ratio=(G+A)/(MP/90)) %>%
+  filter(Ratio>0.89) %>%
+  ggplot(aes(x=reorder(Names, Ratio), y=Ratio))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  scale_fill_manual(values = brewer.pal(8, "Accent"))+
+  scale_y_continuous(breaks = seq(0,2,0.25))+
+  coord_flip()+labs(title="Goals and Assits per 90 Minutes in 2017-18",
+                    x="Player", y="Number of Goals and Assists")+theme_grey(base_size = 12)+
+  theme(panel.background = element_rect(fill="#f6f6f6"),
+        title = element_text(face="italic"))
+```
+
+*Note:* this is calculated taking into account those players who played more than 15 games per season.
+
+\pagebreak
+
+### Percentage of Goals from Overall Goals of Each Club
+This analysis represents the percentage of goals scored by a player from the total goals of the club. The ratios were derived using stats for players who scored more than 12 goals in 2016-2017 and more than 15 in 2017-2018. These limits were set to distinguish clubs that were somewhat successful in that season. An exception from this is Ruben Castro in 2016-2017 where although he scored about 35% of the total goals for Betis, the club finished 15th. 
+
+```{r, dpi=300, fig.width = 8, fig.height = 3.75, warning=F}
+football1 %>%
+  group_by(Clubs) %>%
+  mutate(Total_Goals=sum(G)) %>%
+  mutate(Ratio=G/Total_Goals) %>%
+  arrange(desc(Ratio)) %>%
+  filter(G>12) %>%
+  ggplot(aes(x=reorder(Names, Ratio), y=Ratio))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  #scale_y_continuous(breaks = seq(0,0.5,0.05))+
+  scale_fill_manual(values = brewer.pal(9, "Pastel1"))+
+  coord_flip()+labs(title="Percentage of Goals from Overall Goals of Each Club (2016-17)",
+                    y="Percentage", x="Player")+theme_grey(base_size = 12)+
+  theme(panel.background = element_rect(fill="#f6f6f6"),
+        title = element_text(face="italic"))
+
+
+football2 %>%
+  group_by(Clubs) %>%
+  mutate(Total_Goals=sum(G)) %>%
+  mutate(Ratio=G/Total_Goals) %>%
+  arrange(desc(Ratio)) %>%
+  filter(G>15) %>%
+  ggplot(aes(x=reorder(Names, Ratio), y=Ratio))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  scale_y_continuous(breaks = seq(0,0.6,0.1))+
+  scale_fill_manual(values = brewer.pal(9, "Pastel1"))+
+  coord_flip()+labs(title="Percentage of Goals from Overall Goals of Each Club (2017-18)",
+                    y="Percentage", x="Player")+theme_grey(base_size = 12)+
+  theme(panel.background = element_rect(fill="#f6f6f6"),
+        title = element_text(face="italic"))
+```
+
+This analysis underlines the importance of the player to the club. Although it also might be a weakness for the club to depend so much on one player, this is generally the case for most teams. Iago Aspas was the person with most goals for Celta Vigo in 2016-2017 season. His 22 goals, almost 42% of total goals scored by Celta, underline his importance to the club. 
+
+Gerard Moreno of Espanyol scored 16 goals, or almost 45% of the total Espanyol goals. Although the club have scored only 36 goals for the whole season, which explains their decline in 2017-2018 season, Espanyol will think twice before selling the player if an offer arrives. 
+
+### Distribution of Goals per Each Club
+The following boxplots represent the distribution of total goals per each club.
+
+```{r, dpi=300, fig.width = 8, fig.height = 4.5}
+getPalette = colorRampPalette(brewer.pal(12, "Set3"))
+colourCount = length(unique(football1$Clubs))
+
+ggplot(football1, aes(y=G, x=reorder(Clubs, G)))+
+  geom_boxplot(fill=getPalette(colourCount))+coord_flip()+
+  geom_text_repel(data = subset(football1, G > 15), 
+                  aes(label = football1[football1$G>15, "Names"]))+
+  labs(title="Distribution of Goals Per Each Club (2016-17)", y="Number of Goals", x="Club")+
+  scale_y_continuous(breaks=seq(0,40,5))+
+  scale_fill_manual(values = brewer.pal(12, "Set3"))+
+  theme_minimal()
+
+
+ggplot(football2, aes(y=G, x=reorder(Clubs, G)))+
+  geom_boxplot(fill=getPalette(colourCount))+coord_flip()+
+  geom_text_repel(data = subset(football1, G > 15), 
+                  aes(label = football1[football1$G>15, "Names"]))+
+  labs(title="Distribution of Goals Per Each Club (2017-18)", y="Number of Goals", x="Club")+
+  scale_y_continuous(breaks=seq(0,40,5))+
+  scale_fill_manual(values = brewer.pal(12, "Set3"))+
+  theme_minimal()  
+```
+
+We see that the median value of goals for each player in each club is around 2 for both seasons. However, there are many outliers. For 2016-17 season, the most far outliers are from Barcelona , and they are Messi with 37 goals, followed by Suarez (29 goals). Real Madrid's outlier is Cristiano Ronaldo with 25 goals.
+
+For 2017-18 season, Barcelona's and Real Madrid's many players are also outliers. They are the same players, with the exception that now Ronaldo is on the second place.
+
+\pagebreak
+
+Now, we will use different sources of data (2017-2018 season) not only about the goals by players, but we will also look at the discipline, control and goalkeeping statistics. 
+```{r}
+standard <- read.csv("standard.csv", stringsAsFactors = F)
+discipline <- read.csv("discipline.csv", stringsAsFactors = F)
+control <- read.csv("control.csv", stringsAsFactors = F)
+goalkeeping <- read.csv("goalkeeping.csv", stringsAsFactors = F)
+```
+
+### Number of Offsides (footballers)
+```{r}
+top10_offside <- discipline %>%
+  arrange(desc(OFF), MP) %>%
+  select(Names, OFF) %>%
+  head(10)
+  
+ggplot(top10_offside, aes(x=reorder(Names, OFF), y=OFF, fill=as.factor(OFF)))+
+  geom_bar(stat="identity")+
+  labs(title="Top 10 Players Caught Offside", y="Number of Offsides",
+       x="Player", fill="Offside")+
+  tema + theme(axis.text.x = element_text(angle = 90)) +
+  scale_fill_brewer(palette = "Greens")
+```
+
+The plot demonsrtates the Top 10 Footballers who have been recorded to be in an offside position throughout the 2017-2018 La Liga season. More than 50 offsides were recorded by Luis Suarez making him the footballer who has was caught offside the most.
+
+### Most and Least Red and Yellow Cards
+```{r}
+ggplot(discipline, aes(x=MP, y=(RC+YC))) +
+  geom_point(color=ifelse((discipline$RC+discipline$YC)>=15 |
+            ((discipline$RC+discipline$YC)==0 & discipline$MP>3000),"#f4429b","#30aeb2"), 
+             size=ifelse((discipline$RC+discipline$YC) >= 15 |
+                           ((discipline$RC+discipline$YC)==0 & discipline$MP>3000), 4, 2)) +
+  geom_text_repel(aes(label=ifelse((RC+YC)>=15 | ((RC+YC)==0 & MP>3000),
+                                   as.character(Names),'')), hjust=0,vjust=0) + 
+  tema + labs(title="The number of red and yellow cards per minutes played",
+       x="Minutes Played", y="Red and Yellow Cards")
+```
+
+The plot indicates the number of both red and yellow cards recorded per minutes played (overall throughout La Liga). The players at the bottom of the plot are the best disciplined while moving upwards the disciple gradually decreases. Jefferson Lerma, Jaume Costa, Dani Parejo, Alvaro and Damian Suarez are recorded as being the worst disciplined players while Robeto and Marc-Andre Ter Stegen are the best ones.
+
+### Most Fouls Committed (footballers)
+```{r}
+ggplot(discipline, aes(x=MP, y=FC)) +
+  geom_point(color=ifelse(discipline$FC>=75,"#38c457","#dd8f30"), 
+             size=ifelse(discipline$FC >= 75, 4, 2)) +
+  geom_text_repel(aes(label=ifelse(FC>=75, as.character(Names),'')), hjust=0,vjust=0) + 
+  tema + labs(title="The number of fouls committed per minutes played",
+       x="Minutes Played", y="Number of Fouls")
+```
+
+Similar to the plot above, players at the bottom of the plot have commited the least number of fouls, while Cristhian Stuani, Raul Garcia and Rodri have committed the most overall fouls throughtout the 2017-2018 season.
+
+### Most Fouls Suffered (footballers)
+```{r}
+ggplot(discipline, aes(x=MP, y=FS)) +
+  geom_point(color=ifelse(discipline$FS>=75,"#ddd644","#c98ce2"), 
+             size=ifelse(discipline$FS >= 75, 4, 2)) +
+  geom_text_repel(aes(label=ifelse(FS>=75, as.character(Names),'')), hjust=0,vjust=0) + 
+  tema + labs(title="The number of fouls suffered per minutes played",
+       x="Minutes Played", y="Number of Fouls")
+```
+This plot clearly demonstrates the players against whom the most number of fouls have been committed. As we can see the most fouls have been committed against Munir El Haddadi, while many expected to see Lionel Messi at the top, since he is recognized as one of the best football players and stopping his actions are considered to be the most difficult. However, a possible reason for Messi not being in a higher position may be that Messi usually prefers to stay in his feet and continue playing instead of going down easily.
+
+### Most Fouls Committed (clubs)
+```{r}
+discipline %>%
+  group_by(Clubs) %>%
+  summarise(Fouls=sum(FC)) %>%
+  ggplot(aes(x=reorder(Clubs, -Fouls), y=Fouls))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  coord_flip()+labs(title="Total Fouls Committed in 2017-18 for Each Club",y="Number of Fouls", x="Club")+
+  scale_y_continuous(breaks=seq(0,700,50))+tema+
+  theme_grey(base_size = 11)+theme(legend.position = "none")
+```
+The plot above indicates the number of fouls committed by each club throughout the season. The club with the most number of committed fouls is Getafe and the club with the least -  Barcelona.
+
+### Most Fouls Suffered (clubs)
+```{r}
+discipline%>%
+  group_by(Clubs) %>%
+  summarise(Fouls=sum(FS)) %>%
+  ggplot(aes(x=reorder(Clubs, -Fouls), y=Fouls))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  coord_flip()+labs(title="Total Fouls Suffered in 2017-18 for Each Club",y="Number of Fouls", x="Club")+
+  scale_y_continuous(breaks=seq(0,600,50))+tema+theme_grey(base_size = 11)+
+  theme(legend.position = "none")
+```
+
+The plot above indicates the clubs against which the most number of fouls have been committed throughout he season. The club with the most number of suffered fouls is Valencia and Malaga is the least.
+
+### Number of Corner Kicks (clubs)
+```{r}
+discipline%>%
+  group_by(Clubs) %>%
+  summarise(CK=sum(CK)) %>%
+  ggplot(aes(x=reorder(Clubs, -CK), y=CK))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  coord_flip()+labs(title="Total Number of Corner Kicks in 2017-18 for Each Club",y="Number of Corner Kicks", x="Club")+
+  scale_y_continuous(breaks=seq(0,300,50))+tema+
+  theme(legend.position = "none")
+```
+The plot demonstrates the number of corner kicks recorded by each club. Real Madrid has recorded the most number of corner kicks at the 2017-2018 La Liga, while Las Palmas has recorded the least number of corner kicks.
+
+### Number of Corner Kicks (players)
+```{r}
+top10_CK <- discipline %>%
+  arrange(desc(CK), MP) %>%
+  select(Names, CK, Clubs) %>%
+  head(10)
+  
+ggplot(top10_CK, aes(x=reorder(Names,CK), y=CK, fill=Clubs))+
+  geom_bar(stat="identity")+
+  labs(title="Top 10 Corner Kick Takers", y="Number of Corner Kicks",x="Player")+
+  tema + theme(axis.text.x = element_text(angle = 90)) +
+  scale_fill_brewer(palette = "Set3")
+```
+
+This plot names the top 10 players who have taken the corner kicks. Dani Parejo is leading with more than 150 corner kicks. It is notable that Barcelona was the 6th with the number of corner kicks but there is no player from Barcelona at this top 10 corner kick takers. That is why we decided to separately take a look at Barcelona's corner kick takers.
+
+### Number of Corner Kicks (players)
+```{r}
+top5_CK_BAR <- discipline %>%
+  filter(Clubs=="BAR") %>%
+  arrange(desc(CK), MP) %>%
+  select(Names, CK) %>%
+  head(5)
+  
+ggplot(top5_CK_BAR, aes(x=reorder(Names,CK), y=CK))+
+  geom_bar(stat="identity", aes(fill=Names))+
+  labs(title="Top 5 Corner Kick Takers for Barcelona", y="Number of Corner Kicks",x="Player")+
+  tema + theme(axis.text.x = element_text(angle = 90),
+               legend.position = "none") 
+```
+
+As we an see from the plot, Barcelona does not have a specific person who always takes the owner kicks, but instead has 3, which is why they were not included at the top 10 corner kick takers plot.
+
+
+### Penalty Kicks and Goals (players)
+```{r}
+ggplot(discipline, aes(x=PK, y=PKG)) +
+  geom_point(alpha=0.5, color=ifelse(discipline$PKG==discipline$PK & discipline$PKG >=4,"#38c457","#dd8f30"), 
+             size=ifelse(discipline$PKG == discipline$PK & discipline$PKG >=4, 4, 2)) +
+  geom_text_repel(aes(label=ifelse(PKG==discipline$PK & discipline$PKG >=4, as.character(Names),'')), hjust=0,vjust=0) + 
+  tema + labs(title="The number of Penalty Kich Goals vs Penalty Kicks", x="Penalty Kicks", y="Penalty Kick Goals")
+```
+
+As the plot above demonstrates, Dani Parejo has taken the most penalty kicks and scored all of them. Jonathan Calleri and Cristhian Stuani are the other two players who took more than four penalties and scored all of them.
+
+### Penalty  Kicks (clubs)
+```{r}
+discipline%>%
+  group_by(Clubs) %>%
+  summarise(PK=sum(PK)) %>%
+  ggplot(aes(x=reorder(Clubs, PK), y=PK))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  coord_flip()+labs(title="Total Penalty Kicks Given in 2017-18 for Each Club", y="Number of Penalty Kicks", x="Club")+
+  scale_y_continuous(breaks=seq(0,130,15))+tema+
+  theme(legend.position = "none")
+```
+
+The plot shows the number of penalty kicks taken by each club, with Getafe leading the board. Furthermore, Barcelona is not so high in this list, despite the common belief that referees award Barcelona too many penalties.
+
+### Penalty  Kicks (clubs)
+```{r}
+discipline%>%
+  group_by(Clubs) %>%
+  summarise(PKG=sum(PKG)) %>%
+  ggplot(aes(x=reorder(Clubs, PKG), y=PKG))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  coord_flip()+labs(title="Total Penalty Kick Goals in 2017-18 for Each Club", y="Number of Penalty Kicks Goals", x="Club")+
+  scale_y_continuous(breaks=seq(0,130,15))+tema+
+  theme(legend.position = "none")
+```
+
+As the above plot demonstrates, Valencia and Real Madrid have scored the most penalties taken, while Alaves has scored the least.
+
+### Passes (clubs)
+```{r}
+control%>%
+  group_by(Clubs) %>%
+  summarise(Pass=sum(P)) %>%
+  ggplot(aes(x=reorder(Clubs, Pass), y=Pass))+
+  geom_bar(stat="identity", aes(fill=Clubs))+
+  coord_flip()+labs(title="Total Passes in 2017-18 for Each Club", y="Number of Passes", x="Club")+
+  scale_y_continuous(breaks=seq(0,20000,2500))+tema+
+  theme(legend.position = "none")
+```
+
+The above plot mentions the total number of passes throughout the 2017-2018 season by each club. As we can see Barcelona has the most number of passes, although right before the La Liga the manager of the club was changed, meaning that the new manager remains faithful to Barcelona's style of playing with many passes.
+
+### Number of Saves (goalkeeper)
+```{r}
+ggplot(goalkeeping, aes(x=MP, y=SV)) +
+  geom_point(color=ifelse(goalkeeping$SV>=100,"#2c4d82","#edd821"),
+  size=ifelse(goalkeeping$SV>= 100, 4,2)) +
+  geom_text_repel(aes(label=ifelse(SV>=100,
+   as.character(Names),'')), hjust=0,vjust=0) + 
+  tema + labs(title="The number of saves per minutes played",
+       x="Minutes Played", y="Number of Saves")
+```
+
+The plot above demonstrates the number of saves per minutes played throughout the season. Goalkeepers at the top of the plot such as Fernando Pacheco, Neto, Jan Oblak and Leandro Chichizola have recorded the most saves overall throughout the season.
+
+### Number of Clean Sheets (goalkeeper)
+```{r}
+ggplot(goalkeeping, aes(x=GP, y=CS)) +
+  geom_point(color=ifelse(goalkeeping$CS>=15,"#20edac","#7c28a0"),
+  size=ifelse(goalkeeping$CS>= 15, 4,2)) +
+  geom_text_repel(aes(label=ifelse(CS>=15,
+   as.character(Names),'')), hjust=0,vjust=0) + 
+  tema + labs(title="The Number of Clean Sheets per Games Played",
+       x="Games Played", y="Number of Clean Sheets")
+```
+
+The plot above names the goalkeepers who have the most number of clean sheets recorded, As we can see from the plot above, Jan Oblak and Marc-Andre Ter Stegen are the goalkeeprs with te most number of clean sheets.
+
+\pagebreak
+
+# Part #2
+The second part of our homework represents analysis of text, particularly tweets made by different users about trailers of movies *Aquaman* and *Fantastic Beasts*. Warner Bros. revealed the trailers of these movies on 21 of July, 2018, and this topic became very popular that day. The analysis includes some graphs and wordclouds about common words used by the users. Moreover, it includes sentiment analysis of the tweets.
+
+```{r, include=F}
+aquaman<-read.csv("Aquaman.csv", stringsAsFactors = F)
+aquaman$X<-NULL
+beasts<-read.csv("Beasts.csv", stringsAsFactors = F)
+beasts$X<-NULL
+```
+
+```{r}
+#deleting non ASCII reviews   
+aquaman$Reviews<-iconv(aquaman$Reviews, to="ASCII", sub="")
+
+#creating vector source, corpus and tdm.
+vector_source<-VectorSource(aquaman$Reviews)
+corpus<-VCorpus(vector_source)
+
+tdm_aquaman<-TermDocumentMatrix(corpus, control=list(weighting = weightTfIdf, removePunctuation=T, removeNumbers=T, stopwords=T, stemming=T))
+```
+
+### Most Common Words Used by Users (Aquaman)
+```{r, dpi=300, fig.width = 8, fig.height = 4}
+tdm_mat<-as.matrix(tdm_aquaman)
+
+freqs<-rowSums(tdm_mat)
+df_freq<-data.frame(terms=rownames(tdm_mat), freq=freqs, stringsAsFactors = F)
+df_freq<-df_freq[order(df_freq$freq, decreasing = T),]
+
+top10_words<-df_freq[1:10,]
+
+ggplot(top10_words, aes(x=reorder(terms, freq), y=freq))+
+  geom_bar(stat="identity", fill=brewer.pal(n=10, "Set3"))+
+  coord_flip()+theme_minimal(base_size = 15)+
+  labs(title="Top 10  Words Used in Reviews", y="Frequency of Words", x="Words")
+
+set.seed(123)
+```
+
+In the top 10 words list we can see that the most common word is trailer, which is logical. Moreover, we can see term "shazam". This word is frequent because this is also a movie and its trailer was also released by that time. Probably, there were comments about comparison of those trailers.
+
+\pagebreak
+
+We have also created a wordcloud to make the graph more appealing.
+
+```{r}
+wordcloud(words = df_freq$terms, freq = df_freq$freq, min.freq = 10,
+          max.words = 250, random.order = F, colors = brewer.pal(8, "Set2"))
+```
+
+\pagebreak
+
+### Most Common Words Used by Users (Fantastic Beasts)
+```{r}
+#deleting non ASCII reviews   
+beasts$Reviews<-iconv(beasts$Reviews, to="ASCII", sub="")
+
+#creating vector source, corpus and tdm.
+vector_source_beasts<-VectorSource(beasts$Reviews)
+corpus_beasts<-VCorpus(vector_source_beasts)
+
+tdm_beasts<-TermDocumentMatrix(corpus_beasts, control=list(weighting = weightTfIdf, removePunctuation=T, removeNumbers=T, stopwords=T, stemming=T))
+```
+
+```{r, dpi=300, fig.width = 8, fig.height = 4}
+tdm_mat_beasts<-as.matrix(tdm_beasts)
+
+freqs_beasts<-rowSums(tdm_mat_beasts)
+df_freq_beasts<-data.frame(terms=rownames(tdm_mat_beasts), freq=freqs_beasts, stringsAsFactors = F)
+df_freq_beasts<-df_freq_beasts[order(df_freq_beasts$freq, decreasing = T),]
+
+top_10_beasts<-df_freq_beasts[1:10,]
+ggplot(top_10_beasts, aes(x=reorder(terms, freq), y=freq))+
+  geom_bar(stat="identity", fill=brewer.pal(n=10, "Set3"))+
+  coord_flip()+theme_minimal(base_size = 15)+
+  labs(title="Top 10  Words Used in Reviews", y="Frequency of Words", x="Words")
+```
+
+
+```{r}
+set.seed(123)
+wordcloud(words = df_freq_beasts$terms, freq = df_freq_beasts$freq, min.freq = 10,
+          max.words = 250, random.order = F, colors = brewer.pal(8, "Set2"))
+```
+
+As was expected, the most common words about "Fantastic Beasts" were "crime" and "Grindelwald". Users were mosts interested in what is going to be the faith of one of the most dangerous Dark Wizards of all time.  
+\pagebreak
+
+
+### Frequencies of Words across Two Movies
+Now, we want to compare the frequencies of words across two movies. For that reason, we will make a single term document matrix with two documents, one for "Aquaman", the other for "Fantastic Beasts".
+```{r}
+all_aquaman<-paste(aquaman$Reviews, collapse="")
+all_beasts<-paste(beasts$Reviews, collapse="")
+
+all_tweets<-c(all_aquaman, all_beasts)
+
+#Clean all_tweets
+all_tweets<-VectorSource(all_tweets)
+all_corpus<-VCorpus(all_tweets)
+all_dm<-TermDocumentMatrix(all_corpus, control=list(weighting = weightTfIdf, removeNumbers=T, removePunctuation=T, stopwords=T, stemming=T))
+colnames(all_dm)<-c("Aquaman", "Fantastic Beasts")
+all_m<-as.matrix(all_dm)
+
+
+comparison.cloud(all_m, colors=c("orange", "blue"),max.words=50, random.order=F)
+```
+Along with expected words, such as "Harry Potter", "Dumbledor" and others, we see that the wordcloud contains the name of Donald Trump, which is a very interesting finding. 
+
+In order to find out why his name appeared in this topic, we decided to find word associaciations with his name. Here is the graph of word associations:
+
+```{r}
+associations <- findAssocs(all_dm, "trump", 0.2)
+associations_df <- list_vect2df(associations)[, 2:3]
+associations_df_2 <- associations_df
+top_assoc <- associations_df[1:20,]
+ggplot(top_assoc, aes(x = top_assoc[, 2], y = top_assoc[, 1])) + 
+  geom_point(aes(colour=top_assoc$X2, size=5)) + 
+  theme(legend.position="none") +
+  labs(title="Word Associations with 'trump'", x="Association Score", y="Words") +
+  xlim(0.8, 1.2)
+```
+Actually, this graph did not help us much, except one word - "actress". We decided to look if the name of the president was actually connected with the name of the actress. 
+
+We searched for the tweets, and found out this:
+
+```{r}
+trump <- str_subset(beasts$Reviews, pattern = "Trump")
+kable(head(trump,6), col.names = "Tweets")
+```
+
+Following the release of a new trailer for the film, cast members were asked what they would do if they could use a magic spell.
+Not missing a beat, Zoë Kravitz said, “Impeach Trump.” That is why Trump became popular in this topic.
+
+\pagebreak
+
+## Sentiment Analysis
+In this section, we will introduce the emotions of Twitter users about movie trailers "Aquaman" and "Fantastic Beasts".
+
+```{r}
+sent_anal_aquaman<-data.frame(aquaman[1:1000, c("Reviews")], author=c(1:1000))
+colnames(sent_anal_aquaman)<-c("Reviews", "Author")
+sent_anal_aquaman$Reviews<-iconv(sent_anal_aquaman$Reviews, to="ASCII", sub="")
+sent_anal_aquaman<-polarity(text.var = sent_anal_aquaman$Reviews, grouping.var = sent_anal_aquaman$Author)
+sent_scores_aquaman<-scores(sent_anal_aquaman)
+
+df_aquaman<-data.frame(Author=c(1:1000), aquaman[1:1000, c("Reviews")])
+df_aquaman$Average_Polarity<-sent_scores_aquaman$ave.polarity
+
+colnames(df_aquaman)<-c("Author", "Reviews", "Average_Polarity")
+```
+
+### Most Positive Tweets about Aquaman
+Let's see, which are the most positive tweets about *Aquaman*
+```{r, results = 'asis'}
+#Most Positive ones
+pos_aquaman<-df_aquaman %>%
+  arrange(desc(Average_Polarity)) %>%
+  select(Reviews)
+
+pander(head(pos_aquaman,4), split.cell = 80, split.table = Inf)
+```
+Here we see how users express their emotions about the film. As the table shows, most of the users express their opinions by comparing the trailer of the film with other ones. 
+
+### Most Negative Tweets about Aquaman
+```{r}
+#Most Negative ones
+neg_aquaman<-df_aquaman %>%
+  arrange(Average_Polarity) %>%
+  select(Reviews)
+
+pander(head(neg_aquaman,4), split.cell = 80, split.table = Inf)
+#not nice comments
+```
+Here are not very nice comments about the trailer.
+
+
+```{r}
+df_aquaman$Average_Polarity2<-ifelse(df_aquaman$Average_Polarity>0, "Posititive", 
+                            ifelse(df_aquaman$Average_Polarity<0, "Negative", "Neutral"))
+```
+
+
+```{r}
+sent_anal_beasts<-data.frame(beasts[1:1000, c("Reviews")], author=c(1:1000))
+colnames(sent_anal_beasts)<-c("Reviews", "Author")
+sent_anal_beasts$Reviews<-iconv(sent_anal_beasts$Reviews, to="ASCII", sub="")
+sent_anal_beasts<-polarity(text.var = sent_anal_beasts$Reviews, grouping.var = sent_anal_beasts$Author)
+sent_scores_beasts<-scores(sent_anal_beasts)
+
+df_beasts<-data.frame(Author=c(1:1000), beasts[1:1000, c("Reviews")])
+df_beasts$Average_Polarity<-sent_scores_beasts$ave.polarity
+
+colnames(df_beasts)<-c("Author", "Reviews", "Average_Polarity")
+```
+
+### Most Positive Tweets about Fantastic Beasts
+Let's see, which are the most positive tweets about *Fantastic Beasts*
+```{r, results = 'asis'}
+#Most Positive ones
+pos_beasts<-df_beasts %>%
+  arrange(desc(Average_Polarity)) %>%
+  select(Reviews)
+
+pander(head(pos_beasts,4), split.cell = 80, split.table = Inf)
+```
+
+\pagebreak
+
+### Most Negative Tweets about Fantastic Beasts
+```{r, results = 'asis'}
+#Most Negative ones
+neg_beasts<-df_beasts %>%
+  arrange(Average_Polarity) %>%
+  select(Reviews)
+
+pander(head(neg_beasts,4), split.cell = 80, split.table = Inf)
+#not nice comments
+```
+Here we see negative feedback from users.
+
+
+### Distribution of Tweet Emotions
+```{r}
+ggarrange(ggplot(df_aquaman, aes(x=Average_Polarity))+
+  geom_histogram(bins = 40, color="blue", fill="lightblue")+
+  labs(title="Aquaman", x="Polarity Score", y="Number of Users")+
+  scale_x_continuous(breaks = seq(-1,3,0.5))+
+  scale_y_continuous(breaks = seq(0,500,50))+
+  theme(panel.background = element_rect(fill="white"),
+        panel.grid.major = element_line(colour = "#9999ff")),
+ggplot(df_beasts, aes(x=Average_Polarity))+
+  geom_histogram(bins = 40, color="blue", fill="lightblue")+
+  labs(title="Fantastic Beasts", x="Polarity Score", y="Number of Users")+
+  scale_x_continuous(breaks = seq(-1,3,0.5))+
+  scale_y_continuous(breaks = seq(0,200,20))+
+  theme(panel.background = element_rect(fill="white"),
+        panel.grid.major = element_line(colour = "#9999ff")))
+```
+*Note*: Polarity scores with *"minus"* sign indicate negative emotions, *0* is for neutral tweets, and positive numbers indicate positive emotions.
+
+\pagebreak
+
+### Number of Positive, Negative and Neutral Tweets
+```{r}
+df_beasts$Average_Polarity2<-ifelse(df_beasts$Average_Polarity>0, "Posititive", 
+                            ifelse(df_beasts$Average_Polarity<0, "Negative", "Neutral"))
+```
+
+#### Aquaman
+```{r}
+kable(table(df_aquaman$Average_Polarity2), col.names = c("Tweets", "Frequency"))
+```
+
+#### Fantastic Beasts
+```{r}
+kable(table(df_beasts$Average_Polarity2), col.names = c("Tweets", "Frequency"))
+```
+
+As the histograms and the table suggest, there are many users who had neutral reaction to the trailer of Aquaman. For Fantastic Beasts, there are much more positive reactions, very few negative and neutral emotions.
+
+### Interactive Plots
+Please, see interactive plots on the datasets of Aquaman and Fantastic Beasts in the section *"Interactive Plots"*.
