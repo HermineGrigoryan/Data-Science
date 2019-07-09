@@ -1,0 +1,544 @@
+"Names","Clubs","GP","GS","MP","G","A","SOG","S","YC","RC"
+" Messi Lionel L.","BAR",34,32,2832,37,9,82,178,6,0
+" Suarez Luis L.","BAR",35,34,2863,29,13,64,120,8,0
+" Cristiano Ronaldo","RMD",29,29,2544,25,6,64,160,4,0
+" Aspas Iago I.","CEL",32,25,2318,19,3,41,80,10,1
+" Aduriz","ATH",32,27,2462,16,1,48,83,9,1
+" Griezmann Antoine A.","ATL",36,36,3065,16,8,44,89,4,0
+" Morata Alvaro A.","RMD",26,14,1332,15,4,31,53,8,0
+" Ramirez Sandro S.","MAG",30,28,2315,14,3,39,92,4,0
+" Neymar","BAR",30,30,2652,13,11,50,107,8,1
+" Moreno Gerard G.","ESP",37,37,3280,13,4,33,82,6,0
+" Castro Ruben R.","BET",35,32,2782,13,3,49,117,3,0
+" Willian Jose","RSO",28,27,2078,12,4,31,70,4,0
+" Gameiro Kevin K.","ATL",31,21,1717,12,5,24,48,0,0
+" Andone Florin F.","DEP",37,32,2900,12,2,44,99,6,0
+" Enrich Sergi S.","EIB",38,31,2828,11,7,29,64,4,0
+" Benzema Karim K.","RMD",29,23,1914,11,5,37,69,0,0
+" Bakambu Cedric C.","VIL",26,17,1570,11,1,24,47,5,0
+" Juanmi","RSO",35,19,1835,11,0,20,48,8,1
+" Ben Yedder Wissam W.","SEV",31,20,1666,11,4,25,46,0,0
+" Garcia Raul R.","ATH",36,34,2883,10,4,43,94,11,0
+" Isco","RMD",30,18,1638,10,8,14,33,4,0
+" Piatti Pablo P.","ESP",30,30,2353,10,10,20,45,8,0
+" Carrasco Yannick Y.","ATL",35,27,2269,10,4,36,85,5,0
+" Pedro Leon","EIB",37,34,3009,10,5,38,87,6,0
+" Boateng Kevin-Prince K.","LP",28,25,1989,10,4,33,74,12,2
+" Leon Sergio S.","OSA",33,27,2402,10,0,32,69,4,0
+" Cop Duje D.","GIJ",31,27,2280,9,3,26,65,7,0
+" Vela Carlos C.","RSO",35,31,2563,9,2,29,62,6,0
+" Soriano Roberto R.","VIL",33,31,2470,9,5,24,42,8,1
+" Carmona Carlos C.","GIJ",25,21,1865,8,2,15,33,5,0
+" Rakitic Ivan I.","BAR",32,26,2344,8,5,17,47,5,0
+" Rodriguez James J.","RMD",22,13,1180,8,6,18,33,1,0
+" Prieto Xabi X.","RSO",38,32,2820,8,6,13,35,2,0
+" Torres Fernando F.","ATL",31,13,1419,8,5,22,44,3,0
+" Szymanowski Alexander A.","LGN",28,24,2037,8,2,19,41,1,0
+" Sarabia Pablo P.","SEV",34,22,2134,8,8,22,47,10,0
+" Sansone Nicola N.","VIL",32,25,2125,8,3,21,46,7,0
+" Adrian","EIB",28,19,1537,7,1,25,43,3,0
+" Garcia Kike K.","EIB",24,18,1536,7,1,18,25,8,0
+" Muniain Iker I.","ATH",35,28,2413,7,2,18,42,5,0
+" Viera Jonathan J.","LP",31,30,2586,7,7,29,68,4,0
+" Bale Gareth G.","RMD",19,17,1425,7,2,26,63,3,1
+" Ramos Sergio S.","RMD",28,28,2489,7,0,13,36,8,1
+" Iborra","SEV",31,12,1471,7,2,17,30,9,0
+" Kodro Kenan K.","OSA",28,17,1466,7,1,16,37,4,0
+" Torres Roberto R.","OSA",32,26,2312,7,3,23,64,7,0
+" Vazquez Franco F.","SEV",30,26,2092,7,3,22,53,8,0
+" Deyverson","ALA",32,29,2581,7,1,24,53,14,0
+" El Haddadi Munir M.","VAL",34,22,2055,6,3,20,48,5,1
+" Rafinha","BAR",18,14,1077,6,2,10,25,1,0
+"Borges Celso  C.","DEP",34,30,2723,6,0,14,37,5,0
+"Fornals Pablo  P.","MAG",32,31,2672,6,2,10,40,6,0
+"Alcacer Paco  P.","BAR",21,7,940,6,3,16,28,1,0
+"Mina Santi  S.","VAL",29,13,1403,6,2,15,29,2,0
+"Baptistao Leo  L.","ESP",21,16,1428,6,4,21,37,1,0
+"Vitolo ","SEV",30,25,2335,6,6,13,30,7,1
+"Vietto Luciano  L.","SEV",21,14,1309,6,3,14,30,3,0
+"Jovetic Stevan  S.","SEV",21,12,1203,6,4,24,57,4,0
+"Zaza Simone  S.","VAL",20,15,1375,6,1,15,57,7,0
+"Guerrero ","LGN",31,25,2148,5,1,18,44,3,0
+"Ibai ","ALA",29,23,1828,5,2,23,51,2,0
+"Williams Inaki  I.","ATH",38,31,2800,5,6,31,67,4,0
+"Lemos Mauricio  M.","LP",23,21,1853,5,0,11,19,6,0
+"Parejo Dani  D.","VAL",36,36,3195,5,7,26,50,12,0
+"Rodrigo ","VAL",19,17,1394,5,3,11,30,1,0
+"Bruno ","VIL",34,33,2984,5,2,10,19,5,0
+"Trigueros Manuel  M.","VIL",37,35,3038,5,1,21,48,4,0
+"Pires Gabriel  G.","LGN",34,33,2752,5,2,17,57,9,0
+"Nani ","VAL",25,22,1870,5,7,19,66,6,0
+"Livaja Marko  M.","LP",25,16,1447,5,3,16,26,12,1
+"Pereira Andreas  A.","GRA",35,34,2829,5,3,25,71,10,1
+"Kravets Artem  A.","GRA",26,16,1377,5,2,14,40,2,0
+"Joselu ","DEP",20,9,891,5,1,14,30,7,0
+"Carcela-Gonzalez Mehdi  M.","GRA",22,20,1752,5,1,15,31,6,0
+"Castro Carlos  C.","GIJ",25,10,1015,4,1,10,16,1,0
+"Sanabria Tony  T.","BET",22,16,1495,4,1,11,36,2,0
+"San Jose ","ATH",35,30,2700,4,1,10,26,9,0
+"Guidetti John  J.","CEL",23,14,1067,4,1,8,17,8,0
+"Riera Oriol  O.","OSA",22,18,1468,4,1,15,37,3,0
+"Bigas ","LP",32,31,2653,4,1,7,16,5,0
+"El Zhar Nabil  N.","LGN",26,18,1673,4,4,18,31,2,0
+"Tana ","LP",32,25,2210,4,4,11,25,4,0
+"Camacho ","MAG",35,35,3146,4,2,14,38,14,0
+"Casemiro ","RMD",25,20,1706,4,0,4,14,9,0
+"Soldado Roberto  R.","VIL",10,10,746,4,3,8,17,8,0
+"Mendez Edgar  E.","ALA",27,18,1616,4,1,15,41,6,0
+"Correa Angel  A.","ATL",31,10,1214,4,8,16,38,6,0
+"Koke ","ATL",36,36,3171,4,8,10,27,8,1
+"Saul ","ATL",33,29,2542,4,3,15,48,8,0
+"Correa Joaquin  J.","SEV",26,15,1312,4,0,13,35,6,0
+"Neves Luciano  L.","LGN",25,11,1169,4,2,8,24,3,0
+"Rossi Giuseppe  G.","CEL",18,9,791,4,1,10,25,1,0
+"Garay Ezequiel  E.","VAL",27,27,2340,4,0,7,11,7,0
+"Babel Ryan  R.",NA,11,5,559,4,1,7,13,3,0
+"Ramos Adrian  A.","GRA",14,13,1131,4,1,13,22,4,0
+"Inui Takashi  T.","EIB",28,26,2086,3,2,20,45,5,0
+"Ramis Ivan  I.","EIB",22,20,1721,3,0,6,9,5,0
+"Douglas ","GIJ",21,20,1718,3,0,5,15,6,0
+"Turan Arda  A.","BAR",18,14,1243,3,3,5,14,1,0
+"Orellana Fabian  F.","VAL",23,19,1665,3,3,12,26,7,1
+"Wass Daniel  D.","CEL",32,29,2394,3,4,15,44,3,0
+"Asensio Marco  M.","RMD",23,11,1076,3,2,12,25,0,0
+"Perez Hernan  H.","ESP",32,20,1796,3,1,7,26,8,0
+"Mosquera Pedro  P.","DEP",23,17,1558,3,0,4,10,7,0
+"Momo ","LP",23,12,1240,3,0,5,12,3,0
+"Charles ","MAG",21,11,1137,3,1,15,39,5,0
+"Recio ","MAG",18,16,1358,3,2,8,15,9,0
+"Jese ","LP",16,13,1159,3,1,19,35,5,0
+"Kroos Toni  T.","RMD",29,28,2500,3,12,12,33,6,0
+"Bautista Jon  J.","RSO",12,2,304,3,0,4,13,0,0
+"Martinez Inigo  I.","RSO",34,34,2999,3,2,13,41,11,1
+"Yuri ","RSO",35,35,3090,3,2,9,42,9,0
+"Zurutuza ","RSO",31,29,2503,3,1,13,26,9,1
+"Gomes Andre  A.","BAR",30,17,1591,3,1,7,20,3,0
+"Soler Carlos  C.","VAL",23,19,1724,3,1,13,28,4,1
+"Joaquin ","BET",28,19,1676,3,4,11,26,2,0
+"Reyes ","ESP",21,10,863,3,4,6,14,1,0
+"Filipe Luis ","ATL",34,34,3009,3,6,11,25,5,0
+"Godin Diego  D.","ATL",31,30,2705,3,1,7,30,12,1
+"Gaitan Nico  N.","ATL",23,11,1022,3,2,6,10,1,0
+"Alegria Alex  A.","BET",25,15,1433,3,2,21,47,2,0
+"Colak Emre  E.","DEP",33,29,2477,3,6,13,43,5,0
+"Garcia Manu  M.","ALA",25,23,2013,3,1,7,24,8,0
+"Jurado Jose Manuel  J.","ESP",31,27,2459,3,3,14,37,1,0
+"Santos Michael  M.","MAG",14,8,738,3,0,9,22,3,0
+"Bebe ","EIB",20,8,684,3,2,10,24,2,0
+"Santos Christian  C.","ALA",21,8,831,3,1,10,22,2,0
+"Sisto Pione  P.","CEL",30,19,1665,3,3,13,28,1,0
+"Mercado Gabriel  G.","SEV",29,26,2185,3,1,6,12,10,0
+"Camarasa Victor  V.","ALA",31,28,2502,3,1,9,32,4,0
+"Suarez Mario  M.","VAL",21,17,1498,3,0,4,11,3,0
+"Lopez David  D.","ESP",36,36,3240,3,2,10,17,3,0
+"Katai Aleksandar  A.","ALA",20,8,769,3,3,8,21,3,0
+"Canella ","GIJ",20,20,1756,2,1,2,11,4,0
+"Cases Nacho  N.","GIJ",21,16,1472,2,1,4,10,6,0
+"Jony ","MAG",24,15,1249,2,1,9,31,3,0
+"Alvarez Sergio  S.","GIJ",36,34,3006,2,1,6,15,9,0
+"Escalante Gonzalo  G.","EIB",30,24,2021,2,1,6,25,10,1
+"Laporte Aymeric  A.","ATH",33,33,2865,2,0,6,17,10,0
+"Lekue Inigo  I.","ATH",25,17,1573,2,1,5,20,1,0
+"Viguera Borja  B.","GIJ",17,6,768,2,1,2,13,2,0
+"Pique Gerard  G.","BAR",25,25,2192,2,0,9,20,6,0
+"Vidal Aleix  A.","BAR",6,5,475,2,2,4,9,0,0
+"Cabral Gustavo  G.","CEL",25,25,2179,2,1,8,17,6,0
+"Mallo Hugo  H.","CEL",23,22,1987,2,1,6,14,10,1
+"Burgui ","GIJ",32,21,1998,2,4,25,50,6,0
+"Caicedo Felipe  F.","ESP",27,14,1287,2,1,6,16,5,1
+"Araujo Sergio  S.",NA,11,5,530,2,1,10,17,2,0
+"Gomez Vicente  V.","LP",29,28,2322,2,0,11,24,3,0
+"Juan Carlos ","MAG",28,23,2063,2,4,8,15,8,1
+"Juanpi ","MAG",22,16,1472,2,0,11,41,6,1
+"Ontiveros Javi  J.","MAG",18,7,828,2,3,4,24,4,0
+"Marcelo ","RMD",30,26,2277,2,10,4,25,2,0
+"Nacho ","RMD",28,24,2302,2,3,5,8,4,0
+"Pepe ","RMD",13,13,1081,2,1,2,5,1,0
+"Vazquez Lucas  L.","RMD",33,12,1385,2,7,13,31,4,0
+"Oyarzabal Mikel  M.","RSO",38,30,2725,2,7,17,59,0,0
+"Adrian ","VIL",15,7,675,2,1,5,12,0,0
+"Castillejo Samu  S.","VIL",33,24,2049,2,3,14,31,2,0
+"Dos Santos Jonathan  J.","VIL",34,22,2206,2,3,9,40,4,0
+"Cuenca Isaac  I.","GRA",25,18,1740,2,0,7,17,4,0
+"Ibanez Rober  R.","LGN",5,1,168,2,1,3,9,0,0
+"Lomban David  D.","GRA",21,20,1841,2,0,3,11,6,0
+"Rico Fran  F.","EIB",17,13,1225,2,1,5,12,5,0
+"Ceballos Dani  D.","BET",30,24,2336,2,2,17,38,8,0
+"Montoya Martin  M.","VAL",29,26,2220,2,1,4,11,8,0
+"Piccini Cristiano  C.","BET",23,21,1742,2,3,3,15,7,2
+"N'Zonzi Steven  S.","SEV",35,34,3067,2,3,12,31,6,0
+"Laguardia ","ALA",26,24,2149,2,1,4,9,6,0
+"Martin Jonas  J.","BET",20,15,1156,2,0,5,10,5,0
+"Mandi Aissa  A.","BET",26,25,2217,2,1,9,13,4,0
+"Rodriguez Victor  V.","GIJ",25,15,1381,2,1,12,26,1,0
+"Borre Santos  S.","VIL",17,2,346,2,1,9,12,0,0
+"Gomez Moi  M.","GIJ",26,24,1877,2,5,8,21,5,0
+"Llorente Diego  D.","MAG",25,23,2028,2,0,5,11,2,1
+"Medran Alvaro  A.","VAL",16,10,949,2,0,4,13,3,0
+"Boga Jeremie  J.","GRA",26,14,1453,2,1,9,29,0,0
+"Roncaglia Facundo  F.","CEL",32,30,2716,2,0,5,19,9,1
+"Sobrino Ruben  R.","ALA",11,5,500,2,1,6,12,1,0
+"Feddal Zouhair  Z.","ALA",27,27,2245,2,1,4,10,10,2
+"Guilherme ","DEP",30,26,2280,2,1,6,30,6,0
+"Ganso ","SEV",10,5,484,2,1,6,11,0,0
+"Timor David  D.","LGN",24,22,1881,2,1,5,17,6,1
+"Krsticic Nenad  N.","ALA",14,9,747,2,0,2,3,3,0
+"Alexis ","ALA",24,19,1816,2,1,2,8,12,1
+"Lopez Unai  U.","LGN",23,12,1164,2,0,6,12,2,0
+"Pato Alexandre  A.",NA,14,11,881,2,1,13,27,0,0
+"Ponce Ezequiel  E.","GRA",25,10,1125,2,0,10,38,5,0
+"Mateo ","LP",19,8,724,2,0,3,8,0,0
+"Navarro Rafa  R.","BET",18,14,1279,2,2,5,7,4,0
+"Nasri Samir  S.","SEV",23,22,1843,2,3,12,25,6,0
+"Mangala Eliaquim  E.","VAL",30,30,2646,2,0,7,10,11,1
+"Bueno Alberto  A.","LGN",24,8,933,2,3,8,19,1,0
+"Navarro Marc  M.","ESP",12,10,789,2,1,3,15,0,0
+"Jozabed ","CEL",19,12,1095,2,2,9,17,2,0
+"Kakuta Gael  G.","DEP",10,8,542,2,1,4,11,0,0
+"Traore Lacina  L.","GIJ",8,5,463,2,0,9,19,2,0
+"Steven ","OSA",5,4,429,2,0,2,4,0,0
+"Hernandez Luis  L.","MAG",19,19,1679,1,1,3,4,3,0
+"Garcia Dani  D.","EIB",36,36,3184,1,1,4,21,9,1
+"Luna Antonio  A.","EIB",26,24,2117,1,5,1,4,3,0
+"Balenziaga ","ATH",33,33,2851,1,1,1,10,3,1
+"Benat ","ATH",32,28,2410,1,5,12,35,9,0
+"De Marcos ","ATH",27,24,2149,1,4,3,10,3,0
+"Merino Sabin  S.","ATH",13,5,436,1,1,4,15,2,0
+"Rico Mikel  M.","ATH",18,4,469,1,0,2,9,3,0
+"Susaeta ","ATH",26,11,1104,1,2,4,14,4,0
+"Alba Jordi  J.","BAR",26,21,1965,1,6,1,6,4,0
+"Mascherano Javier  J.","BAR",25,20,1917,1,3,2,9,6,0
+"Mathieu Jeremy  J.","BAR",13,12,1039,1,0,2,7,0,0
+"Beauvue Claudio  C.","CEL",13,5,652,1,2,5,19,1,0
+"Bongonda Theo  T.","CEL",30,26,2170,1,3,9,33,3,0
+"Cheikh Pape  P.","CEL",16,5,562,1,0,1,1,3,0
+"Diaz Marcelo  M.","CEL",26,17,1643,1,2,4,12,5,0
+"Fontas Andreu  A.","CEL",17,17,1462,1,1,2,3,8,1
+"Hernandez Pablo  P.","CEL",26,20,1897,1,0,5,12,11,1
+"Radoja Nemanja  N.","CEL",31,27,2421,1,0,4,9,3,0
+"Sanchez Victor  V.","ESP",26,25,2281,1,1,1,8,8,0
+"Alvaro ",NA,15,14,1263,1,1,2,8,7,0
+"Bergantinos Alex  A.","DEP",8,6,552,1,0,1,3,2,0
+"Perez Lucas  L.",NA,1,1,90,1,1,1,3,0,0
+"Sidnei ","DEP",29,29,2491,1,0,1,13,2,0
+"Garcia David  D.","LP",22,17,1647,1,1,3,10,6,0
+"Mesa Roque  R.","LP",35,34,3037,1,2,8,24,14,0
+"Wakaso ","GRA",11,10,869,1,1,5,17,8,1
+"Albentosa Raul  R.","DEP",27,26,2335,1,1,4,9,10,1
+"Castro Chory  C.","MAG",29,21,1794,1,3,13,31,5,0
+"Duda ","MAG",16,2,378,1,2,1,6,3,0
+"Rosales Roberto  R.","MAG",32,32,2861,1,2,5,20,6,1
+"Danilo ","RMD",17,17,1488,1,2,4,11,2,0
+"Kovacic Mateo  M.","RMD",27,19,1689,1,3,5,15,2,0
+"Mariano ","RMD",8,0,115,1,1,1,5,0,0
+"Modric Luka  L.","RMD",25,22,1891,1,2,11,20,2,0
+"Varane Raphael  R.","RMD",23,23,1927,1,2,2,10,1,0
+"Illarramendi Asier  A.","RSO",34,33,3004,1,2,5,19,13,0
+"Navas Raul  R.","RSO",32,31,2799,1,1,6,24,5,0
+"Pardo Ruben  R.","BET",19,17,1430,1,0,7,18,2,0
+"Reyes Diego  D.","ESP",34,32,2889,1,0,3,8,2,0
+"Bakkali Zakaria  Z.","VAL",18,1,276,1,0,2,6,2,0
+"Cancelo Joao  J.","VAL",35,27,2424,1,4,10,23,7,1
+"Fuego Javi  J.","ESP",31,29,2565,1,0,3,11,10,1
+"Gaya ","VAL",27,24,2090,1,2,8,14,4,0
+"Costa Jaume  J.","VIL",31,30,2680,1,3,3,9,14,1
+"Ruiz Victor  V.","VIL",28,27,2368,1,1,3,6,4,2
+"Suarez Denis  D.","BAR",26,12,1180,1,3,7,14,1,0
+"Babin Jean-Sylvain  J.","GIJ",22,20,1715,1,1,3,8,2,0
+"Bruno ","BET",16,15,1330,1,0,1,3,9,0
+"Cejudo Alvaro  A.","BET",17,6,805,1,1,3,16,9,0
+"Petros ","BET",32,24,2142,1,2,2,11,10,1
+"Pezzella German  G.","BET",36,36,3102,1,0,6,16,10,0
+"Fernandez Carlos  C.",NA,3,1,88,1,0,1,2,0,0
+"Pareja Nico  N.","SEV",27,27,2165,1,1,4,12,6,1
+"Savic Stefan  S.","ATL",32,30,2727,1,0,1,4,6,0
+"Hernandez Theo  T.","ALA",32,30,2725,1,3,9,26,11,1
+"Partey Thomas  T.","ATL",16,6,629,1,2,4,9,5,0
+"Tiago ","ATL",12,5,448,1,0,2,5,2,0
+"Diaz Victor  V.","LGN",23,20,1811,1,1,6,15,6,0
+"Mantovani ","LGN",31,30,2699,1,0,3,15,10,0
+"Durmisi Riza  R.","BET",27,27,2387,1,4,5,25,4,0
+"Pena Ruben  R.","EIB",28,9,1050,1,0,6,21,3,0
+"Lejeune Florian  F.","EIB",34,33,2971,1,1,11,30,8,1
+"Kiyotake Hiroshi  H.",NA,4,3,286,1,1,1,2,0,0
+"Flano Miguel  M.","OSA",12,12,1035,1,0,2,5,3,0
+"Garcia David  D.","OSA",25,23,2190,1,0,4,9,8,0
+"Toquero Gaizka  G.","ALA",23,15,1227,1,1,5,9,4,0
+"Berenguer Alex  A.","OSA",29,22,2118,1,6,7,17,3,0
+"Olavide Miguel  M.","OSA",14,4,489,1,0,1,4,3,0
+"Clerc Carlos  C.","OSA",25,22,1947,1,0,2,8,2,0
+"Insua Pablo  P.","LGN",29,20,1902,1,0,3,7,3,0
+"Machis Darwin  D.","LGN",27,10,1047,1,3,12,35,1,0
+"Umtiti Samuel  S.","BAR",25,24,2133,1,0,2,6,4,0
+"Causic Goran  G.","OSA",26,22,2007,1,2,4,14,4,0
+"Lemos Alvaro  A.","CEL",5,5,439,1,0,1,3,2,0
+"Gutierrez Felipe  F.",NA,14,9,754,1,0,3,9,2,0
+"Merida Fran  F.","OSA",15,9,810,1,0,4,16,5,0
+"Gil Carles  C.","DEP",23,16,1410,1,4,6,16,7,0
+"Vesga Mikel  M.","GIJ",23,19,1694,1,1,3,14,7,0
+"Rico Diego  D.","LGN",25,25,2222,1,0,4,16,6,0
+"Brasanac Darko  D.","BET",25,19,1628,1,1,3,14,7,0
+"En-Nesyri Youseff  Y.","MAG",13,0,325,1,1,7,15,2,0
+"Nano ","EIB",6,1,159,1,0,3,6,0,0
+"Siovas Dimitrios  D.","LGN",16,16,1392,1,0,4,9,4,0
+"Ingason Sverrir Ingi  S.","GRA",17,17,1473,1,0,1,5,7,0
+"Ely Rodrigo  R.","ALA",10,8,788,1,0,1,7,4,0
+"Hjulsager Andrew  A.","CEL",7,3,259,1,0,3,8,0,0
+"Echiejile Elderson  E.","GIJ",3,2,197,1,0,1,1,0,0
+"Alvaro ","VIL",25,22,2063,1,1,2,10,9,0
+"Cuellar Ivan  I.","GIJ",36,36,3240,0,0,0,0,5,0
+"Halilovic Alen  A.","LP",18,6,645,0,2,6,16,2,0
+"Lora ","GIJ",7,4,376,0,0,0,3,2,1
+"Lopez Isma  I.","GIJ",27,19,1727,0,3,3,12,5,0
+"Mere Jorge  J.","GIJ",31,31,2774,0,0,2,9,7,1
+"Ndi Dani  D.","GIJ",6,1,149,0,0,0,3,0,0
+"Rachid ",NA,8,6,494,0,0,0,5,3,0
+"Capa ","EIB",31,29,2552,0,3,2,9,10,1
+"Dos Santos Mauro  M.","EIB",11,8,761,0,0,0,2,1,0
+"Junca ","EIB",9,7,683,0,2,0,4,1,0
+"Keko ","MAG",22,13,1054,0,3,3,17,6,0
+"Lillo ","GIJ",25,24,2137,0,0,2,6,8,1
+"Pantic Aleksandar  A.",NA,2,1,154,0,0,0,1,1,0
+"Peleteiro Jota  J.",NA,5,3,204,0,0,0,3,0,0
+"Riesgo Asier  A.","EIB",16,16,1253,0,0,0,0,0,2
+"Boveda Eneko  E.","ATH",19,18,1559,0,0,0,1,1,0
+"Elustondo Gorka  G.","ATH",2,1,104,0,0,1,1,0,0
+"Eraso ","ATH",7,4,377,0,1,0,5,2,0
+"Etxeita ","ATH",10,7,712,0,0,1,2,2,0
+"Herrerin Iago  I.","LGN",21,21,1826,0,0,0,0,0,1
+"Iraizoz ","ATH",16,15,1404,0,0,0,0,1,0
+"Iturraspe Ander  A.","ATH",24,12,1151,0,1,1,3,3,0
+"Villalibre Asier  A.",NA,6,0,72,0,1,0,1,0,0
+"Bravo Claudio  C.",NA,1,1,90,0,0,0,0,0,0
+"Busquets Sergio  S.","BAR",33,33,2693,0,3,0,4,9,0
+"Iniesta Andres  A.","BAR",23,13,1332,0,3,7,18,2,0
+"Ortola Adria  A.","ALA",2,2,180,0,0,0,0,0,0
+"Roberto Sergi  S.","BAR",32,26,2382,0,6,5,16,5,0
+"Samper Sergi  S.","GRA",22,13,1268,0,1,3,6,6,0
+"Ter Stegen Marc-Andre  M.","BAR",36,36,3240,0,0,0,0,1,0
+"Gomez Sergi  S.","CEL",25,21,1905,0,0,1,3,6,2
+"Jonny ","CEL",30,23,2207,0,3,4,12,8,0
+"Planas Carles  C.","CEL",12,11,948,0,0,0,2,3,0
+"Ruben ","CEL",11,11,990,0,0,0,0,2,0
+"Sene Josep  J.","CEL",13,8,664,0,2,4,15,1,0
+"Alvarez Sergio  S.","CEL",26,26,2340,0,1,0,0,0,1
+"Arbilla Anaitz  A.","EIB",22,17,1573,0,2,2,9,5,0
+"Ciani Michael  M.",NA,1,0,53,0,0,0,0,0,0
+"Diop Pape  P.","ESP",18,9,899,0,0,0,4,6,0
+"Duarte Ruben  R.","ESP",3,1,101,0,0,0,0,1,0
+"Duarte Oscar  O.","ESP",15,13,1124,0,0,1,6,4,0
+"Fuentes ","OSA",17,16,1287,0,1,1,1,5,0
+"Lopez Javi  J.","ESP",19,17,1524,0,1,0,1,3,0
+"Sevilla Salva  S.","ESP",6,3,268,0,0,0,1,1,0
+"Alvarez Victor  V.","ESP",4,2,202,0,0,0,0,2,0
+"Arribas ","DEP",23,20,1907,0,0,4,13,7,0
+"Cartabia Fede  F.",NA,4,2,152,0,0,0,2,0,0
+"Fajr Faycal  F.","DEP",24,14,1202,0,2,8,20,4,1
+"Juanfran ","DEP",34,34,2961,0,6,7,24,4,1
+"Laure ","DEP",7,4,425,0,0,0,0,0,1
+"Luisinho ","DEP",26,20,1907,0,2,0,13,6,0
+"Lux German  G.","DEP",25,25,2205,0,0,0,0,5,0
+"Navarro Fernando  F.","DEP",25,22,2051,0,0,0,4,6,0
+"Artiles Aythami  A.","LP",11,8,836,0,0,2,5,6,1
+"Castellano Dani  D.","LP",27,25,2109,0,1,3,9,2,0
+"Hernan ","LP",10,3,288,0,0,1,7,3,1
+"Lizoain Raul  R.","LP",13,13,1170,0,0,0,0,2,0
+"Montoro ","LP",17,12,1107,0,0,1,4,1,0
+"Simon David  D.","LP",16,14,1321,0,1,4,11,3,0
+"Varas Javi  J.","LP",25,25,2250,0,0,0,0,0,0
+"Kameni Carlos  C.","MAG",35,35,3150,0,0,0,0,2,0
+"Ochoa Guillermo  G.","GRA",38,38,3420,0,0,0,0,2,0
+"Ricca Federico  F.","MAG",21,19,1619,0,1,3,10,6,0
+"Torres Miguel  M.","MAG",22,18,1565,0,0,2,4,4,0
+"Weligton ","MAG",1,1,90,0,0,0,0,1,0
+"Carvajal Dani  D.","RMD",23,21,2014,0,4,4,9,11,0
+"Casilla Kiko  K.","RMD",11,11,990,0,0,0,0,0,0
+"Llorente Marcos  M.","ALA",32,31,2805,0,2,1,14,5,0
+"Navas Keylor  K.","RMD",27,27,2430,0,0,0,0,2,0
+"Tejero Alvaro  A.","RMD",1,0,2,0,0,0,0,0,0
+"Bergara Markel  M.","RSO",6,3,286,0,0,0,0,0,0
+"Canales Sergio  S.","RSO",31,7,993,0,4,6,19,2,0
+"Elustondo Aritz  A.","RSO",9,4,461,0,0,0,4,0,1
+"Gonzalez Mikel  M.","RSO",9,8,665,0,0,0,1,2,0
+"Granero Esteban  E.","RSO",19,8,693,0,1,3,10,6,1
+"Hernandez Hector  H.","GRA",17,13,1163,0,2,0,6,2,0
+"Martinez Carlos  C.","RSO",10,10,870,0,2,1,1,2,0
+"Odriozola Alvaro  A.","RSO",15,15,1285,0,4,0,1,0,0
+"Rulli Geronimo  G.","RSO",38,38,3420,0,0,0,0,4,0
+"Zaldua Joseba  J.","RSO",14,12,1104,0,1,2,7,3,1
+"Zubeldia Igor  I.","RSO",4,3,254,0,0,0,2,1,0
+"Abdennour Aymen  A.","VAL",13,9,878,0,0,0,2,4,0
+"Alves Diego  D.","VAL",33,33,2970,0,0,0,0,4,0
+"Cheryshev Denis  D.","VIL",11,2,335,0,0,3,7,1,0
+"Domenech Jaume  J.","VAL",3,3,270,0,0,0,0,0,0
+"Gil Nacho  N.","VAL",2,0,3,0,0,0,0,0,0
+"Lato Toni  T.","VAL",8,4,481,0,1,0,0,2,0
+"Mir Rafa  R.","VAL",2,0,5,0,0,0,0,0,0
+"Mustafi Shkodran  S.",NA,1,0,45,0,0,0,1,0,0
+"Perez Enzo  E.","VAL",27,26,2195,0,1,2,11,14,1
+"Ryan Mathew  M.",NA,2,2,180,0,0,0,0,0,0
+"Santos Aderllan  A.","VAL",12,11,1001,0,0,2,3,1,0
+"Siqueira Guilherme  G.","VAL",10,7,541,0,1,0,0,2,0
+"Sito ","VAL",1,0,1,0,0,0,0,0,0
+"Vezo Ruben  R.","GRA",19,18,1534,0,1,3,6,4,1
+"Asenjo Sergio  S.","VIL",24,24,2105,0,0,0,0,0,0
+"Bonera Daniele  D.","VIL",6,6,540,0,0,0,0,2,0
+"Garcia Samu  S.","LGN",11,5,528,0,1,1,8,0,0
+"Rodri ","VIL",23,8,837,0,1,1,8,1,0
+"Leiva Nahuel  N.","BET",10,0,148,0,0,0,1,0,1
+"Mario ","VIL",36,36,3240,0,3,11,30,6,0
+"Marin Adrian  A.","LGN",13,11,912,0,0,3,7,3,0
+"Musacchio ","VIL",23,23,2067,0,2,1,8,6,0
+"Rukavina Antonio  A.","VIL",4,3,271,0,0,0,1,2,0
+"Agbo Uche  U.","GRA",31,28,2385,0,0,4,13,14,2
+"Barral David  D.",NA,8,2,310,0,1,2,8,1,0
+"Fernandez Andres  A.","VIL",15,14,1315,0,0,0,0,2,0
+"Foulquier Dimitri  D.","GRA",22,21,1872,0,2,0,3,5,0
+"Krhin Rene  R.","GRA",12,11,937,0,0,1,3,0,0
+"Marquez Javi  J.",NA,7,4,397,0,1,2,11,2,0
+"Penaranda Adalberto  A.","MAG",3,1,171,0,0,0,0,1,0
+"Perez Ruben  R.","LGN",30,26,2335,0,1,4,19,9,0
+"Adan ","BET",37,37,3330,0,0,0,0,5,0
+"Digard Didier  D.","OSA",3,3,194,0,0,0,1,1,0
+"Gimenez Dani  D.","BET",1,1,90,0,0,0,0,2,1
+"Musonda Charly  C.",NA,8,1,278,0,1,2,6,2,0
+"N'Diaye Alfred  A.",NA,7,1,112,0,1,0,1,1,0
+"Ruiz Fabian  F.",NA,4,3,154,0,0,0,1,0,0
+"Torres Xavi  X.","GIJ",17,8,858,0,0,3,6,6,0
+"Carrico Daniel  D.","SEV",6,6,453,0,0,0,0,2,0
+"Escudero Sergio  S.","SEV",26,25,2281,0,3,12,31,7,0
+"Ferreira Mariano  M.","SEV",31,29,2643,0,2,3,9,9,0
+"Gonzalez Diego  D.",NA,3,0,31,0,0,0,0,0,0
+"Kolodziejczak Thimothee  T.",NA,5,3,329,0,0,0,2,1,0
+"Krohn-Dehli Michael  M.","SEV",2,2,171,0,0,0,3,0,0
+"Rami Adil  A.","SEV",21,21,1785,0,0,2,10,5,1
+"Rico Sergio  S.","SEV",35,35,3150,0,0,0,0,0,0
+"Soria David  D.","SEV",1,1,90,0,0,0,0,0,0
+"Fernandez Augusto  A.","ATL",3,2,143,0,0,0,0,0,0
+"Gabi ","ATL",34,33,2896,0,0,5,25,9,0
+"Gimenez Jose  J.","ATL",17,12,1012,0,0,6,14,5,0
+"Juanfran ","ATL",23,21,1978,0,2,1,2,2,0
+"Kranevitter Matias  M.","SEV",21,14,1283,0,0,0,3,6,0
+"Lucas ","ATL",15,13,1253,0,0,0,1,2,0
+"Moya ","ATL",9,8,770,0,0,0,0,0,0
+"Oblak Jan  J.","ATL",30,30,2650,0,0,0,0,1,0
+"Martin Alberto  A.","LGN",16,14,1191,0,0,0,4,7,1
+"Serantes Jon Ander  J.","LGN",13,13,1110,0,0,1,1,2,0
+"Coentrao Fabio  F.","RMD",3,2,169,0,1,0,1,0,0
+"Femenia Kiko  K.","ALA",31,28,2503,0,2,1,5,6,0
+"Gama Bruno  B.","DEP",22,18,1452,0,0,8,27,3,0
+"Valle Borja  B.",NA,7,1,202,0,0,1,4,0,0
+"Tyton Przemyslaw  P.","DEP",13,12,1125,0,0,0,0,1,0
+"Roberto ","ESP",4,3,307,0,0,0,0,0,0
+"Lopes Helder  H.","LP",15,13,1225,0,1,0,6,4,0
+"Kuzmanovic Zdravko  Z.","MAG",4,3,216,0,0,0,4,1,0
+"Concha David  D.","RSO",8,1,110,0,0,0,2,0,0
+"Gaztanaga Jon  J.","RSO",2,0,24,0,0,0,1,1,0
+"Rivera Cristian  C.","EIB",17,6,711,0,0,2,7,3,0
+"Tienza Fausto  F.","OSA",19,16,1231,0,0,5,8,8,0
+"Arrizabalaga Kepa  K.","ATH",23,23,2016,0,0,0,0,1,0
+"Bustinza Unai  U.","LGN",22,21,1790,0,1,3,13,10,0
+"Moran Erik  E.","LGN",12,11,952,0,1,0,3,7,0
+"Tito ","LGN",23,21,1878,0,3,0,7,4,0
+"Vrsaljko Sime  S.","ATL",14,11,923,0,0,0,3,2,0
+"Romero Jaime  J.","OSA",19,8,897,0,4,6,16,1,0
+"Fernandez Mario  M.","OSA",7,7,585,0,0,0,0,3,0
+"Flano Javi  J.","OSA",4,2,130,0,0,0,1,0,0
+"Garcia Unai  U.","OSA",22,20,1870,0,0,1,8,4,0
+"Tano ","OSA",11,9,734,0,1,0,0,3,1
+"Garcia Raul  R.","ALA",18,14,1268,0,0,0,3,6,0
+"Pacheco Fernando  F.","ALA",36,36,3240,0,0,0,0,1,0
+"Bunuel Aitor  A.","OSA",15,10,1029,0,0,0,6,3,0
+"Oier ","OSA",36,36,3150,0,2,2,7,11,0
+"Otegui Antonio  A.","OSA",3,0,44,0,0,0,0,0,0
+"Omar ","LGN",15,11,975,0,2,2,16,4,0
+"Cerci Alessio  A.","ATL",1,0,14,0,0,0,0,0,0
+"Costas David  D.",NA,1,1,90,0,1,0,0,1,0
+"Asdrubal ",NA,3,0,31,0,0,0,0,0,0
+"Tyronne ",NA,3,0,42,0,0,0,0,1,0
+"Yoel ","EIB",25,22,2117,0,0,0,0,1,1
+"Martinez Alex  A.","BET",14,11,967,0,0,3,8,2,0
+"Toral Jon  J.",NA,5,4,268,0,0,0,0,2,0
+"Digne Lucas  L.","BAR",17,14,1175,0,0,1,5,3,0
+"Nauzet ","OSA",13,13,1170,0,0,0,0,1,0
+"Gabriel Silva ",NA,12,11,977,0,0,0,1,3,0
+"Macedo Michel  M.","LP",25,24,2086,0,4,1,10,5,0
+"Sastre Lluis  L.",NA,1,1,90,0,0,0,0,0,0
+"Afif Akram  A.","GIJ",9,2,230,0,0,1,1,2,0
+"Torres Daniel  D.","ALA",21,17,1438,0,0,2,7,7,0
+"De las Cuevas Miguel  M.","OSA",28,20,1795,0,1,7,22,3,0
+"Brignoli Alberto  A.",NA,1,0,60,0,0,0,0,0,0
+"Angban Victorien  V.","GRA",10,8,685,0,0,0,2,4,0
+"Amorebieta Fernando  F.","GIJ",27,26,2221,0,1,2,9,17,0
+"Jose Angel ","VIL",7,7,630,0,1,0,7,2,0
+"Medjani Carl  C.",NA,8,7,594,0,0,0,3,2,0
+"Zozulya Roman  R.","BET",6,1,152,0,0,1,3,1,0
+"Castellano Javi  J.","LP",5,0,94,0,0,0,0,0,0
+"Kone Bakary  B.","MAG",7,7,602,0,0,0,1,3,1
+"Villanueva Mikel  M.","MAG",15,14,1264,0,0,3,4,4,0
+"Alena Carles  C.","BAR",3,0,40,0,0,0,1,1,0
+"Santos Marlon  M.","BAR",2,2,180,0,0,0,0,0,0
+"Galvez Alejandro  A.","EIB",19,14,1327,0,0,2,5,4,0
+"Yeray ","ATH",26,25,2270,0,0,2,12,3,0
+"Espinoza Cristian  C.",NA,6,1,159,0,0,1,2,1,0
+"Saunier Matthieu  M.","GRA",16,16,1310,0,1,0,0,4,0
+"Moreno Marlos  M.","DEP",19,9,792,0,0,6,25,0,0
+"Marino Diego  D.","GIJ",2,2,180,0,0,0,0,0,1
+"Fernandez Pablo  P.","GIJ",2,0,20,0,0,0,1,0,0
+"Rodriguez Juan  J.","GIJ",4,2,230,0,0,0,0,1,0
+"Cantalapiedra Aitor  A.","VIL",1,0,3,0,0,0,0,0,0
+"Suarez Leo  L.","VIL",3,0,16,0,0,0,1,0,0
+"Demichelis Martin  M.","MAG",12,8,773,0,0,2,4,3,0
+"Vigaray Carlos  C.","ALA",19,10,943,0,3,0,3,1,0
+"Martins Luis  L.",NA,2,1,73,0,0,0,0,0,0
+"Silva Gaston  G.","GRA",22,19,1748,0,0,1,5,6,0
+"Garcia Imanol  I.","OSA",8,6,526,0,0,0,6,1,0
+"Jose Carlos ","BET",6,6,498,0,0,0,0,0,0
+"Gonzalez Mario  M.","VIL",2,0,23,0,0,0,0,0,0
+"Martin Aaron  A.","ESP",30,28,2587,0,0,1,3,5,0
+"Roca Marc  M.","ESP",25,14,1316,0,1,3,12,4,0
+"Saborit Enric  E.","ATH",9,5,459,0,0,1,4,1,0
+"Villar Ivan  I.","CEL",1,1,90,0,0,0,0,0,0
+"Kone Mamadou  M.","LGN",5,1,169,0,0,1,3,0,0
+"Cillessen Jasper  J.","BAR",1,1,90,0,0,0,0,0,0
+"Sirigu Salvatore  S.","OSA",20,20,1798,0,0,0,0,1,1
+"Riviere Emmanuel  E.","OSA",15,8,799,0,1,6,13,3,1
+"Atzili Omer  O.","GRA",9,3,316,0,0,0,2,0,0
+"Tabanou Franck  F.","GRA",6,6,367,0,0,1,2,3,0
+"Boyko Denys  D.","MAG",3,3,270,0,0,0,0,0,0
+"Alamo Javi  J.",NA,2,0,11,0,0,0,1,0,0
+"Donk Ryan  R.","BET",16,9,854,0,1,0,4,3,0
+"Lopez Diego  D.","ESP",35,35,3113,0,0,0,0,3,0
+"Vazquez Alvaro  A.","ESP",10,2,313,0,1,1,5,0,0
+"Areitio Markel  M.","EIB",1,0,45,0,0,0,0,0,0
+"Fernandez Alvaro  A.","OSA",1,0,45,0,0,0,0,0,0
+"Rodrigues Kevin  K.","RSO",2,1,103,0,0,0,3,1,0
+"Hongla Martin  M.","GRA",10,8,793,0,0,1,4,2,0
+"Munoz Luis  L.","MAG",5,4,381,0,0,0,1,0,0
+"Melendo ","ESP",11,2,298,0,0,0,1,0,0
+"Marquez Ivan  I.","OSA",4,4,360,0,1,0,0,4,0
+"Barrios Diego  D.","LGN",1,0,61,0,0,0,0,0,0
+"Champagne Nereo  N.","LGN",4,4,360,0,0,0,0,1,0
+"Lenglet Clement  C.","SEV",17,15,1357,0,0,1,1,2,0
+"Pinchi Oscar  O.","DEP",1,0,1,0,0,0,0,0,0
+"Sanchez Ruben  R.","GIJ",2,0,39,0,0,0,2,0,0
+"John Ola  O.","DEP",11,3,348,0,1,3,8,1,0
+"Malle Aly  A.","GRA",11,6,505,0,0,4,7,1,0
+"Romero Oscar  O.","ALA",13,4,528,0,1,10,24,3,0
+"Kone Panagiotis  P.","GRA",2,0,42,0,0,0,0,0,0
+"Exposito Erik  E.","LP",2,2,167,0,0,1,1,0,0
+"Ramirez Benito  B.","LP",2,0,14,0,0,0,0,0,0
+"Roef Davy  D.","DEP",1,1,90,0,0,0,0,0,0
+"Tosca Alin  A.","BET",17,17,1503,0,0,0,2,2,0
+"Montoya Walter  W.","SEV",4,1,109,0,0,0,2,0,0
+"Vujadinovic Nikola  N.","OSA",10,10,789,0,0,4,5,0,0
+"Rodriguez Jose  J.","MAG",6,6,456,0,0,2,2,2,1
+"Loe Raoul  R.","OSA",7,6,569,0,0,2,4,2,0
+"Estupinan Pervis  P.","GRA",2,2,180,0,0,1,1,1,0
+"Guridi Jon  J.","RSO",1,1,75,0,0,0,0,0,0
+"Exposito Edu  E.","DEP",1,1,45,0,0,0,1,0,0
+"Perea Luis  L.","OSA",1,0,19,0,0,0,0,0,0
+"Barja Kike  K.","OSA",1,0,16,0,0,0,0,0,0
+"Entrena Juanan  J.",NA,3,1,103,0,0,2,6,0,0
+"Jean Carlos ","GRA",1,0,29,0,0,0,1,0,0
+"Entrena Juanan  J.","GRA",3,1,103,0,0,2,6,0,0

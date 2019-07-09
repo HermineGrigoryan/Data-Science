@@ -1,0 +1,180 @@
+---
+title: 'Course: Data Science'
+author:
+- Anna Baghumyan
+- Maria Davoodian
+- Hermine Grigoryan
+- Arusyak Hakobyan
+- Lilia Mamikonyan
+date: "July 19, 2018"
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, warning=F)
+```
+
+This is the continuation of text mining.
+
+```{r, include=F}
+library(dplyr) #Data manipulation (also included in the tidyverse package)
+library(tidytext) #Text mining
+library(tidyr) #Spread, separate, unite, text mining (also included in the tidyverse package)
+library(widyr) #Use for pairwise correlation
+
+#Visualizations!
+library(ggplot2) #Visualizations (also included in the tidyverse package)
+library(ggrepel) #`geom_label_repel`
+library(gridExtra) #`grid.arrange()` for multi-graphs
+library(knitr) #Create nicely formatted output tables
+library(kableExtra) #Create nicely formatted output tables
+library(formattable) #For the color_tile function
+library(circlize) #Visualizations - chord diagram
+library(memery) #Memes - images with plots
+#library(magick) #Memes - images with plots (image_read)
+library(yarrr)  #Pirate plot
+library(radarchart) #Visualizations
+library(igraph) #ngram network diagrams
+#library(ggraph) #ngram network diagrams
+```
+
+```{r, include=F}
+#Customize the text tables for consistency using HTML formatting
+my_kable_styling <- function(dat, caption) {
+  kable(dat, "html", escape = FALSE, caption = caption) %>%
+    kable_styling(bootstrap_options = c("striped", "condensed", "bordered"),
+                  full_width = FALSE)
+}
+
+aqua_data <- read.csv('aquaman.csv',  stringsAsFactors = F)
+beasts<-read.csv("Beasts.csv", stringsAsFactors = F)
+
+beasts$type<-c("beast")
+aqua_data$type<-type<-c("aqua")
+new_movies<-rbind(beasts, aqua_data[1:1400,])
+glimpse(new_movies) #Transposed version of `print()`
+```
+
+```{r, include=F}
+#Create tidy text format: Unnested, Unsummarized, Stop and Short words
+new_tidy <- new_movies %>%
+  unnest_tokens(word, Reviews) %>% #Break the reviews into individual words
+  filter(!nchar(word) < 3) %>% #Words like "ah" or "oo" used in music
+  anti_join(stop_words) #Data provided by the tidytext package
+glimpse(new_tidy) #From `dplyr`, better than `str()`.
+
+new_sentiments <- sentiments %>% #From the tidytext package
+  filter(lexicon != "loughran") %>% #Remove the finance lexicon
+  mutate( sentiment = ifelse(lexicon == "AFINN" & score >= 0, "positive",
+                             ifelse(lexicon == "AFINN" & score < 0,
+                                    "negative", sentiment))) %>%
+  group_by(lexicon) %>%
+  mutate(words_in_lexicon = n_distinct(word)) %>%
+  ungroup()
+```
+
+```{r}
+new_sentiments %>%
+  group_by(lexicon, sentiment, words_in_lexicon) %>%
+  summarise(distinct_words = n_distinct(word)) %>%
+  ungroup() %>%
+  spread(sentiment, distinct_words) %>%
+  mutate(lexicon = color_tile("lightblue", "lightblue")(lexicon),
+         words_in_lexicon = color_bar("lightpink")(words_in_lexicon)) %>%
+  my_kable_styling(caption = "Word Counts Per Lexicon")
+```
+The table above gives an idea of the size and structure of each lexicon(library built in), which we will use in further analysis.
+
+```{r, include=F}
+movie_bing <- new_tidy %>%
+  inner_join(get_sentiments("bing"))
+movie_nrc <- new_tidy %>%
+  inner_join(get_sentiments("nrc"))
+movie_sub <- new_tidy %>%
+  inner_join(get_sentiments("nrc")) %>%
+  filter(!sentiment %in% c("positive", "negative"))
+```
+
+```{r}
+new_plot <- movie_nrc %>%
+  group_by(sentiment, type) %>%
+  summarise(word_count = n()) %>%
+  ungroup() %>%
+  mutate(sentiment = reorder(sentiment, word_count)) %>%
+  #Use `fill = -word_count` to make the larger bars darker
+  ggplot(aes(sentiment, word_count, fill = -word_count)) +
+  geom_col() +
+  guides(fill = FALSE) + #Turn off the legend
+  labs(x = NULL, y = "Word Count") +
+  scale_y_continuous(limits = c(0, 1000)) + #Hard code the axis limit
+  ggtitle("Beast And Aquaman Sentiment") +
+  coord_flip()
+
+plot(new_plot)
+```
+
+This plot shows the sentiment of two movies together and highlights the one with leading word count.
+As we can see there are lots of positive sentiments, however, different types of negative ones
+such as fear, anger, sadness, disgust are displayed seperately and combined could make a huge differnece.
+
+```{r}
+movie_polarity_type <- movie_bing %>%
+  count(sentiment, type) %>%
+  spread(sentiment, n, fill = 0) %>%
+  mutate(polarity = positive - negative,
+         percent_positive = positive / (positive + negative) * 100)
+
+#Polarity by type
+plot1 <- movie_polarity_type %>%
+  ggplot( aes(type, polarity, fill = type)) +
+  geom_col() +
+  geom_hline(yintercept = 0, color = "red") +
+  theme(plot.title = element_text(size = 11)) +
+  xlab(NULL) + ylab(NULL) +
+  ggtitle("Polarity By Type")
+
+#Percent positive by type
+plot2 <- movie_polarity_type %>%
+  ggplot( aes(type, percent_positive, fill = type)) +
+  geom_col() +
+  geom_hline(yintercept = 0, color = "red") +
+  theme(plot.title = element_text(size = 11)) +
+  xlab(NULL) + ylab(NULL) +
+  ggtitle("Percent Positive By Type")
+
+grid.arrange(plot1, plot2, ncol = 2)
+```
+
+These two plots show the polarity and the percent positive by movie "type" (Aquaman or Beasts).
+Polarity (positive - negative) field and a percent_positive field (positive/totalsentiment∗100) are ploted for different perspectives.
+We can say that even though Aquaman has less postitive reviews then Beasts, when taking
+into account all reviews the result is changing and the huge difference between the movies is
+dissaperaing.
+```{r}
+#Get the count of words per sentiment per type
+type_sentiment_nrc <- movie_sub %>%
+  group_by(type, sentiment) %>%
+  count(type, sentiment) %>%
+  select(type, sentiment, sentiment_type_count = n)
+
+#Get the total count of sentiment words per type (not distinct)
+total_sentiment_type <- movie_sub %>%
+  count(type) %>%
+  select(type, type_total = n)
+
+#Join the two and create a percent field
+type_radar_chart <- type_sentiment_nrc %>%
+  inner_join(total_sentiment_type, by = "type") %>%
+  mutate(percent = sentiment_type_count / type_total * 100 ) %>%
+  filter(type %in% c("aqua","beast")) %>%
+  select(-sentiment_type_count, -type_total) %>%
+  spread(type, percent)
+
+chartJSRadar(showToolTipLabel = TRUE, scores = type_radar_chart,
+             main = "Aqaman & Beasts Radar")
+```
+The radar shows that both movies have left similar patterns, however, there is more 
+anger towards Beasts and  more joy towards Aqaman. So, we can conclude that by written reviews 
+people have more positive views about Aquaman rather than Beasts.
+
