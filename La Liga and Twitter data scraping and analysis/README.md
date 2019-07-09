@@ -13,3 +13,11 @@ information about reactions of Twitter users about trailers of movies **Aquaman*
 Bros. revealed the trailers of these movies on 21 of July, 2018, and this topic became very popular that day.
 The analysis includes some graphs and wordclouds about common words used by the users. Moreover, it
 includes sentiment analysis of the tweets.
+
+The project was completed by AUA students:
+
+- Anna Baghumyan
+- Maria Davoodian
+- Hermine Grigoryan
+- Arusyak Hakobyan
+- Lilia Mamikonyan
