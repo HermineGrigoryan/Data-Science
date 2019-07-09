@@ -1,4 +1,4 @@
-## Objective
+## Group Homework (Scraping La Liga data and Sentiment Analysis of Aquaman and Fantastic Beasts)
 
 In this group homework we used Web scraping techqniques (Web Scraping and APIs) to scrap data from
 different websites and work on it. The project consists of two parts.
